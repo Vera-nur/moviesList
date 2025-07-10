@@ -24,7 +24,7 @@ class MovieListViewModel: ObservableObject {
                     self?.errorMessage = nil
                 case .failure(let error):
                     self?.movies = []
-                    self?.errorMessage = "Film yüklenemedi: \(error.localizedDescription)"
+                    self?.errorMessage = "Failed to load movies: \(error.localizedDescription)"
                 }
             }
         }
