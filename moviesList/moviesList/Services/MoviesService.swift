@@ -31,7 +31,7 @@ struct TMDBService {
 
     static func fetchPopularMovies(completion: @escaping (Result<[Movie], TMDBError>) -> Void) {
         let apiKey = getAPIKey()
-        let url = "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&language=tr"
+        let url = "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&language=en-US"
 
         AF.request(url).responseDecodable(of: MovieResponse.self) { response in
             switch response.result {
@@ -50,7 +50,7 @@ struct TMDBService {
             return
         }
 
-        let url = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(encoded)&language=tr"
+        let url = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(encoded)&language=en-US"
 
         AF.request(url).responseDecodable(of: MovieResponse.self) { response in
             switch response.result {

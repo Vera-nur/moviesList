@@ -10,6 +10,9 @@ import Kingfisher
 
 struct MovieDetailView: View {
     let movie: Movie
+    @EnvironmentObject var favoriteviewModel: FavoritesViewModel
+    @State private var isFavorite: Bool = false
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         ScrollView {
@@ -34,11 +37,37 @@ struct MovieDetailView: View {
 
                 Text(movie.overview)
                     .font(.body)
+                
             }
             .padding()
         }
         .navigationTitle("Movie Details")
         .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(trailing:
+            Button(action: {
+            isFavorite.toggle()
+            /*if isFavorite && !favoriteviewModel.isFavorite(movie: movie) {
+                favoriteviewModel.addFavorite(movie: movie)
+            }else if !isFavorite && favoriteviewModel.isFavorite(movie: movie) {
+                favoriteviewModel.removeFavorite(movie: movie)
+            }*/
+            //bu şekilde mi daha doğru??
+            }) {
+                Image(systemName: isFavorite ? "heart.fill" : "heart")
+                    .foregroundColor(.red)
+            }
+        )
+        .onAppear {
+            isFavorite = favoriteviewModel.isFavorite(movie: movie)
+        }
+        .onDisappear() { // bu olmayınca favorilerden çıkarında direkt favori listesine atıyordu detail kısmında kalmıyordu ama bu da mantıklı mı???
+            //ya da o şekilde olması daha mı mantıklıdı
+            if isFavorite && !favoriteviewModel.isFavorite(movie: movie) {
+                favoriteviewModel.addFavorite(movie: movie)
+            }else if !isFavorite && favoriteviewModel.isFavorite(movie: movie) {
+                favoriteviewModel.removeFavorite(movie: movie)
+            }
+        }
     }
 }
 

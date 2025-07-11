@@ -8,8 +8,33 @@
 import SwiftUI
 
 struct FavoriteView: View {
+    @EnvironmentObject var favoriteViewModel: FavoritesViewModel
+    
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView{
+            if favoriteViewModel.favoriteMovies.isEmpty {
+                Text("You have no favorite movies yet.")
+                    .foregroundColor(.gray)
+                    .padding()
+            }else{
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(favoriteViewModel.favoriteMovies) { movie in
+                            NavigationLink(destination: MovieDetailView(movie: movie)) {
+                                MovieGridItemView(movie: movie)
+                            }
+                        }
+                    }
+                    .padding()
+                }
+                .navigationTitle("Favorites")
+            }
+        }
     }
 }
 
