@@ -17,6 +17,9 @@ enum TMDBError: Error {
 
 struct TMDBService {
     
+    private static let BaseUrl = "https://api.themoviedb.org/3"
+        
+    
     static private func getAPIKey() -> String {
         guard
             let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
@@ -28,36 +31,50 @@ struct TMDBService {
 
         return apiKey
     }
+    
+    private static func request <T: Decodable>(endpoint: String, parameters: [String: Any] = [:], completion: @escaping (Result<T, TMDBError>) -> Void) {
+        var allParameters = parameters
+        allParameters["api_key"] = getAPIKey()
+        allParameters["language"] = "en-US"
+        
+        let url = "\(BaseUrl)\(endpoint)"
+        
+        AF.request(url, parameters: allParameters)
+            .validate()
+            .responseDecodable(of: T.self) { response in
+                switch response.result {
+                case .success(let value):
+                    completion(.success(value))
+                case .failure(let error):
+                    completion(.failure(.networkError(error)))
+                }
+            
+        }
+    }
 
     static func fetchPopularMovies(completion: @escaping (Result<[Movie], TMDBError>) -> Void) {
-        let apiKey = getAPIKey()
-        let url = "https://api.themoviedb.org/3/movie/popular?api_key=\(apiKey)&language=en-US"
-
-        AF.request(url).responseDecodable(of: MovieResponse.self) { response in
-            switch response.result {
-            case .success(let result):
-                completion(.success(result.results))
-            case .failure(let error):
-                completion(.failure(.networkError(error)))
+        request(endpoint: "/movie/popular") {(result: Result<MovieResponse, TMDBError>) in
+                switch result {
+                case .success(let response):
+                    completion(.success(response.results))
+                case .failure(let error):
+                    completion(.failure(error))
             }
         }
     }
 
     static func searchMovies(query: String, completion: @escaping (Result<[Movie], TMDBError>) -> Void) {
-        let apiKey = getAPIKey()
         guard let encoded = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             completion(.failure(.urlError))
             return
         }
-
-        let url = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&query=\(encoded)&language=en-US"
-
-        AF.request(url).responseDecodable(of: MovieResponse.self) { response in
-            switch response.result {
-            case .success(let result):
-                completion(.success(result.results))
-            case .failure(let error):
-                completion(.failure(.networkError(error)))
+        
+        request(endpoint: "/search/movie", parameters: ["query" : encoded]) {(result: Result<MovieResponse, TMDBError>) in
+                switch result {
+                case .success(let response):
+                    completion(.success(response.results))
+                case .failure(let error):
+                    completion(.failure(error))
             }
         }
     }
