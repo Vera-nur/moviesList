@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D28BBFE2E252C57003CB839 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6D28BBFD2E252C57003CB839 /* FirebaseAuth */; };
+		6D28BC002E252C57003CB839 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6D28BBFF2E252C57003CB839 /* FirebaseCore */; };
+		6D28BC022E252C57003CB839 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 6D28BC012E252C57003CB839 /* FirebaseDatabase */; };
+		6D28BC042E252C57003CB839 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6D28BC032E252C57003CB839 /* FirebaseFirestore */; };
 		6D29C7052E212FBB00B982DC /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 6D29C7042E212FBB00B982DC /* Lottie */; };
 		6DA209642E1FCFC80045632E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6DA209632E1FCFC80045632E /* Alamofire */; };
 		6DF248DD2E1FDF3F00DB7A7D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6DF248DC2E1FDF3F00DB7A7D /* Kingfisher */; };
@@ -71,9 +75,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D28BC022E252C57003CB839 /* FirebaseDatabase in Frameworks */,
 				6DF248DD2E1FDF3F00DB7A7D /* Kingfisher in Frameworks */,
+				6D28BC002E252C57003CB839 /* FirebaseCore in Frameworks */,
 				6DA209642E1FCFC80045632E /* Alamofire in Frameworks */,
 				6D29C7052E212FBB00B982DC /* Lottie in Frameworks */,
+				6D28BBFE2E252C57003CB839 /* FirebaseAuth in Frameworks */,
+				6D28BC042E252C57003CB839 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +145,10 @@
 				6DA209632E1FCFC80045632E /* Alamofire */,
 				6DF248DC2E1FDF3F00DB7A7D /* Kingfisher */,
 				6D29C7042E212FBB00B982DC /* Lottie */,
+				6D28BBFD2E252C57003CB839 /* FirebaseAuth */,
+				6D28BBFF2E252C57003CB839 /* FirebaseCore */,
+				6D28BC012E252C57003CB839 /* FirebaseDatabase */,
+				6D28BC032E252C57003CB839 /* FirebaseFirestore */,
 			);
 			productName = moviesList;
 			productReference = 6DA209182E1FBC750045632E /* moviesList.app */;
@@ -224,6 +236,7 @@
 				6DA209622E1FCFC80045632E /* XCRemoteSwiftPackageReference "Alamofire" */,
 				6DF248DB2E1FDF3F00DB7A7D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				6D29C7032E212FBB00B982DC /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				6D28BBFC2E252C57003CB839 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6DA209192E1FBC750045632E /* Products */;
@@ -588,6 +601,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6D28BBFC2E252C57003CB839 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.15.0;
+			};
+		};
 		6D29C7032E212FBB00B982DC /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -615,6 +636,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6D28BBFD2E252C57003CB839 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D28BBFC2E252C57003CB839 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		6D28BBFF2E252C57003CB839 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D28BBFC2E252C57003CB839 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		6D28BC012E252C57003CB839 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D28BBFC2E252C57003CB839 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		6D28BC032E252C57003CB839 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6D28BBFC2E252C57003CB839 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
 		6D29C7042E212FBB00B982DC /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6D29C7032E212FBB00B982DC /* XCRemoteSwiftPackageReference "lottie-ios" */;
