@@ -11,6 +11,7 @@ struct ProfileView: View {
     @ObservedObject var viewModel: UserProfileViewModel
     @EnvironmentObject var authViewModel: AuthViewModel
     @Binding var isShowing: Bool
+    @State private var isEditing = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -24,8 +25,8 @@ struct ProfileView: View {
             
             Divider()
             
-            Button("Change Password") {
-                viewModel.sendPasswordReset()
+            Button("Edit Profile") {
+                isEditing = true
             }
             .foregroundColor(.blue)
             
@@ -40,6 +41,9 @@ struct ProfileView: View {
         .cornerRadius(12)
         .shadow(radius: 5)
         .frame(maxWidth: 250)
+        .sheet(isPresented: $isEditing){
+            EditProfileView(viewModel: viewModel)
+        }
     }
 }
 

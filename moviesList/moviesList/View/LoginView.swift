@@ -9,44 +9,71 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject private var viewModel = AuthViewModel()
-    @State private var isShowing = false
+    @State private var isShowingRegister = false
+    @State private var isShowingResetPassword = false
+
     var body: some View {
-        VStack(spacing:20){
-            TextField("Email", text: $viewModel.email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .keyboardType(.emailAddress)
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
+        VStack(spacing: 20) {
             
-            SecureField("Password", text: $viewModel.password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-            
+            Image("Logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .shadow(radius: 5)
+                .padding(.top, 40)
+
+            Text("Welcome")
+                .font(.title)
+                .fontWeight(.semibold)
+
+            CustomTextField(title: "Email", text: $viewModel.email, keyboardType: .emailAddress)
+            SecureInputField(title: "Password", text: $viewModel.password)
+
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
                     .foregroundColor(.red)
+                    .font(.caption)
+            }
+
+            Button(action: {
+                viewModel.login()
+            }) {
+                Text("Login")
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(10)
+            }
+            Button("Forgot password?") {
+                isShowingResetPassword = true
+            }
+            .font(.footnote)
+            .foregroundColor(.blue)
+            .sheet(isPresented: $isShowingResetPassword) {
+                ForgotPasswordView()
+                    .presentationDetents([.fraction(0.35)])
+                    .presentationDragIndicator(.visible)
             }
             
-            HStack {
-                Button("Login"){
-                    viewModel.login()
-                }
-                
-                Button("Register"){
-                    isShowing = true
-                }
+
+            Button("Don't have an account? Register") {
+                isShowingRegister = true
             }
-            
-            
+            .font(.footnote)
+            .padding(.top, 5)
+
+            Spacer()
         }
         .padding()
-        .fullScreenCover(isPresented: $viewModel.isAuthenticated){
-            HomeView()
+        .fullScreenCover(isPresented: $viewModel.isAuthenticated) {
+            ContentView()
                 .environmentObject(viewModel)
         }
-        .sheet(isPresented: $isShowing){
+        .sheet(isPresented: $isShowingRegister) {
             RegisterView()
         }
-        
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseAuth
 
 class AuthViewModel: ObservableObject {
     @Published var email = ""
@@ -19,8 +20,23 @@ class AuthViewModel: ObservableObject {
                 switch result {
                 case .success:
                     self.isAuthenticated = true
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
+                case .failure(let error as NSError):
+                    switch AuthErrorCode(rawValue: error.code) {
+                    case .wrongPassword:
+                        self.errorMessage = "Incorrect password. Please try again."
+                    case .invalidEmail:
+                        self.errorMessage = "Invalid email format."
+                    case .userNotFound:
+                        self.errorMessage = "No user found with this email."
+                    case .userDisabled:
+                        self.errorMessage = "This user account has been disabled."
+                    case .networkError:
+                        self.errorMessage = "Network error. Check your connection."
+                    default:
+                        self.errorMessage = "Login failed: \(error.localizedDescription)"
+                    }
+                default:
+                    self.errorMessage = "An unknown error occurred."
                 }
             }
         }
@@ -51,6 +67,23 @@ class AuthViewModel: ObservableObject {
         } catch {
             DispatchQueue.main.async {
                 self.errorMessage = error.localizedDescription
+            }
+        }
+    }
+    
+    func resetPassword(email: String) {
+        guard !email.isEmpty else {
+            self.errorMessage = "Please enter your email to reset password."
+            return
+        }
+
+        AuthManager.shared.sendPasswordReset(withEmail: email) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self.errorMessage = "Reset failed: \(error.localizedDescription)"
+                } else {
+                    self.errorMessage = "Password reset email sent. Please check your inbox."
+                }
             }
         }
     }

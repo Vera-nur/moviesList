@@ -17,6 +17,7 @@ class RegisterViewModel: ObservableObject {
     @Published var birthDate: Date = Date()
     @Published var phoneNumber: String = ""
     @Published var errorMessage: String?
+    @Published var registrationSuccess: Bool = false
 
     func register() {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
@@ -48,7 +49,7 @@ class RegisterViewModel: ObservableObject {
             } else {
                 DispatchQueue.main.async {
                     self.errorMessage = nil
-                    print("User info saved successfully")
+                    self.registrationSuccess = true
                 }
             }
         }
