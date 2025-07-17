@@ -13,11 +13,13 @@ struct MovieGridItemView: View {
     
     var body: some View {
         VStack {
-            KFImage(URL(string: "https://image.tmdb.org/t/p/w500\(movie.poster_path ?? "")"))
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 180)
-                .clipped()
+            ImageView(
+                urlString: "https://image.tmdb.org/t/p/w500\(movie.poster_path ?? "")",
+                contentMode: .fill,
+                width: UIScreen.main.bounds.width / 2 - 20,
+                height: 180,
+                isClipped: true
+            )
             Text(movie.title ?? "")
                 .font(.caption)
                 .multilineTextAlignment(.center)

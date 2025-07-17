@@ -35,6 +35,7 @@ class AuthManager {
     func logout() throws {
         try Auth.auth().signOut()
     }
+    
     func sendPasswordReset(withEmail email: String, completion: @escaping (Error?) -> Void) {
         Auth.auth().sendPasswordReset(withEmail: email, completion: completion)
     }

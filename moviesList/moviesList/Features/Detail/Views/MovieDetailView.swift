@@ -18,10 +18,13 @@ struct MovieDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 if let path = movie.poster_path {
-                    KFImage(URL(string: "https://image.tmdb.org/t/p/w500\(path)"))
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(12)
+                    ImageView(
+                        urlString: "https://image.tmdb.org/t/p/w500\(path)",
+                        contentMode: .fill,
+                        width: 150,
+                        height: 200,
+                        cornerRadius: 8
+                    )
                 }
 
                 Text(movie.title ?? "")
