@@ -18,7 +18,7 @@ struct MovieGridItemView: View {
                 .aspectRatio(contentMode: .fill)
                 .frame(height: 180)
                 .clipped()
-            Text(movie.title)
+            Text(movie.title ?? "")
                 .font(.caption)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)

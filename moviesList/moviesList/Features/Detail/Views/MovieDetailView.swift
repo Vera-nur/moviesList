@@ -24,18 +24,18 @@ struct MovieDetailView: View {
                         .cornerRadius(12)
                 }
 
-                Text(movie.title)
+                Text(movie.title ?? "")
                     .font(.title)
                     .fontWeight(.bold)
 
-                Text("Rating: \(String(format: "%.1f", movie.vote_average))")
+                Text("Rating: \(String(format: "%.1f", movie.vote_average ?? 0.0))")
                     .font(.subheadline)
                     .foregroundColor(.gray)
 
-                Text("Release Date: \(movie.release_date)")
+                Text("Release Date: \(movie.release_date ?? "")")
                     .font(.subheadline)
 
-                Text(movie.overview)
+                Text(movie.overview ?? "")
                     .font(.body)
                 
             }
@@ -46,12 +46,6 @@ struct MovieDetailView: View {
         .navigationBarItems(trailing:
             Button(action: {
             isFavorite.toggle()
-            /*if isFavorite && !favoriteviewModel.isFavorite(movie: movie) {
-                favoriteviewModel.addFavorite(movie: movie)
-            }else if !isFavorite && favoriteviewModel.isFavorite(movie: movie) {
-                favoriteviewModel.removeFavorite(movie: movie)
-            }*/
-            //bu şekilde mi daha doğru??
             }) {
                 Image(systemName: isFavorite ? "heart.fill" : "heart")
                     .foregroundColor(.red)
@@ -60,8 +54,7 @@ struct MovieDetailView: View {
         .onAppear {
             isFavorite = favoriteviewModel.isFavorite(movie: movie)
         }
-        .onDisappear() { // bu olmayınca favorilerden çıkarında direkt favori listesine atıyordu detail kısmında kalmıyordu ama bu da mantıklı mı???
-            //ya da o şekilde olması daha mı mantıklıdı
+        .onDisappear() {
             if isFavorite && !favoriteviewModel.isFavorite(movie: movie) {
                 favoriteviewModel.addFavorite(movie: movie)
             }else if !isFavorite && favoriteviewModel.isFavorite(movie: movie) {

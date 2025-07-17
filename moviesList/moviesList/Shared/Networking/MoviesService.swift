@@ -56,7 +56,7 @@ struct TMDBService {
         request(endpoint: "/movie/popular") {(result: Result<MovieResponse, TMDBError>) in
                 switch result {
                 case .success(let response):
-                    completion(.success(response.results))
+                    completion(.success(response.results ?? []))
                 case .failure(let error):
                     completion(.failure(error))
             }
@@ -72,7 +72,7 @@ struct TMDBService {
         request(endpoint: "/search/movie", parameters: ["query" : encoded]) {(result: Result<MovieResponse, TMDBError>) in
                 switch result {
                 case .success(let response):
-                    completion(.success(response.results))
+                    completion(.success(response.results ?? []))
                 case .failure(let error):
                     completion(.failure(error))
             }
