@@ -13,6 +13,23 @@ class AuthViewModel: ObservableObject {
     @Published var password = ""
     @Published var isAuthenticated = false
     @Published var errorMessage: String?
+    
+    init() {
+        observeAuthState()
+    }
+
+    private func observeAuthState() {
+        Auth.auth().addStateDidChangeListener { _, user in
+            DispatchQueue.main.async {
+                if let user = user {
+                    self.email = user.email ?? ""
+                    self.isAuthenticated = true
+                } else {
+                    self.isAuthenticated = false
+                }
+            }
+        }
+    }
 
     func login() {
         AuthManager.shared.login(email: email, password: password) { result in

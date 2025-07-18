@@ -7,12 +7,27 @@
 
 import SwiftUI
 
-struct Poppins: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+extension Font {
+    static func poppins ( size: CGFloat, weight: Font.Weight = .regular) -> Font {
+        switch weight {
+        case .bold:
+            return .custom("Poppins-Bold" , size: size)
+        case .medium:
+            return .custom("Poppins-Medium" , size: size)
+        case .light:
+            return .custom("Poppins-Light" , size: size)
+        case .thin:
+            return .custom("Poppins-Thin" , size: size)
+        case .semibold:
+            return .custom("Poppins-SemiBold" , size: size)
+        default:
+            return .custom("Poppins-Regular" , size: size)
+        }
     }
 }
 
-#Preview {
-    Poppins()
+extension View {
+    func poppinsFont(size: CGFloat, weight: Font.Weight = .regular) -> some View {
+        self.font(.poppins(size: size, weight: weight))
+    }
 }
