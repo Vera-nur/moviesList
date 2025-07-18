@@ -25,7 +25,9 @@ struct HomeView: View {
                     if viewModel.isLoading {
                         ProgressView("Loading...")
                     } else if let error = viewModel.errorMessage {
-                        Text(error).foregroundColor(.red)
+                        Text(error)
+                            .foregroundColor(.red)
+                            .poppinsFont(size: 16)
                     } else {
                         ScrollView {
                             LazyVGrid(columns: columns, spacing: 20) {
@@ -39,8 +41,7 @@ struct HomeView: View {
                         }
                     }
                 }
-
-                // Profile pop-up
+                
                 if isShowingProfile {
                     VStack {
                         HStack {

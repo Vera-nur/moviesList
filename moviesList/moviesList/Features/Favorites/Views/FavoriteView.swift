@@ -19,6 +19,7 @@ struct FavoriteView: View {
         NavigationView{
             if favoriteViewModel.favoriteMovies.isEmpty {
                 Text("You have no favorite movies yet.")
+                    .poppinsFont(size: 16)
                     .foregroundColor(.gray)
                     .padding()
             }else{

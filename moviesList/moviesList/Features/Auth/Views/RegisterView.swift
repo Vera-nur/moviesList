@@ -14,8 +14,7 @@ struct RegisterView: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("Create Your Account")
-                .font(.title2)
-                .bold()
+                .poppinsFont(size: 20, weight: .semibold)
                 .padding(.top, 40)
 
             VStack(spacing: 15) {
@@ -25,7 +24,7 @@ struct RegisterView: View {
 
                     VStack(alignment: .leading, spacing: 5) {
                         Text("Birth Date")
-                            .font(.subheadline)
+                            .poppinsFont(size: 14)
                             .foregroundColor(.gray)
                         DatePicker("", selection: $viewModel.birthDate, displayedComponents: .date)
                             .datePickerStyle(.compact)
@@ -41,7 +40,7 @@ struct RegisterView: View {
                 if let error = viewModel.errorMessage {
                     Text(error)
                         .foregroundColor(.red)
-                        .font(.caption)
+                        .poppinsFont(size: 12)
                         .multilineTextAlignment(.center)
                         .padding(.top, 5)
                 }
@@ -55,6 +54,7 @@ struct RegisterView: View {
                 viewModel.register()
             }) {
                 Text("Register")
+                    .poppinsFont(size: 16, weight: .semibold)
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.blue)
@@ -66,7 +66,7 @@ struct RegisterView: View {
             Button("Back to Login") {
                 dismiss()
             }
-            .font(.footnote)
+            .poppinsFont(size: 12)
             .padding(.top, 5)
 
             Spacer()

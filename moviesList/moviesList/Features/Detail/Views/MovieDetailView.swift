@@ -28,18 +28,18 @@ struct MovieDetailView: View {
                 }
 
                 Text(movie.title ?? "")
-                    .font(.title)
-                    .fontWeight(.bold)
+                    .poppinsFont(size: 22, weight: .bold)
 
                 Text("Rating: \(String(format: "%.1f", movie.vote_average ?? 0.0))")
-                    .font(.subheadline)
+                    .poppinsFont(size: 14)
                     .foregroundColor(.gray)
 
                 Text("Release Date: \(movie.release_date ?? "")")
-                    .font(.subheadline)
+                    .poppinsFont(size: 14)
+
 
                 Text(movie.overview ?? "")
-                    .font(.body)
+                    .poppinsFont(size: 15)
                 
             }
             .padding()

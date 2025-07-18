@@ -17,9 +17,9 @@ struct ProfileView: View {
         VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading, spacing: 4) {
                 Text(viewModel.fullName)
-                    .font(.headline)
+                    .poppinsFont(size: 18, weight: .semibold)
                 Text(viewModel.email)
-                    .font(.caption)
+                    .poppinsFont(size: 14)
                     .foregroundColor(.gray)
             }
             
@@ -29,12 +29,14 @@ struct ProfileView: View {
                 isEditing = true
             }
             .foregroundColor(.blue)
+            .poppinsFont(size: 16, weight: .medium)
             
             Button("Logout", role: .destructive) {
                 authViewModel.logout()
                 isShowing = false
                 
             }
+            .poppinsFont(size: 16, weight: .medium)
         }
         .padding()
         .background(.ultraThinMaterial)

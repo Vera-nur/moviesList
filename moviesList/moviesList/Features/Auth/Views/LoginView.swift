@@ -24,8 +24,7 @@ struct LoginView: View {
                 .padding(.top, 40)
 
             Text("Welcome")
-                .font(.title)
-                .fontWeight(.semibold)
+                .poppinsFont(size: 24, weight: .semibold)
 
             CustomTextField(title: "Email", text: $viewModel.email, keyboardType: .emailAddress)
             SecureInputField(title: "Password", text: $viewModel.password)
@@ -33,13 +32,14 @@ struct LoginView: View {
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
                     .foregroundColor(.red)
-                    .font(.caption)
+                    .poppinsFont(size: 12)
             }
 
             Button(action: {
                 viewModel.login()
             }) {
                 Text("Login")
+                    .poppinsFont(size: 16, weight: .semibold)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -49,7 +49,7 @@ struct LoginView: View {
             Button("Forgot password?") {
                 isShowingResetPassword = true
             }
-            .font(.footnote)
+            .poppinsFont(size: 12)
             .foregroundColor(.blue)
             .sheet(isPresented: $isShowingResetPassword) {
                 ForgotPasswordView()
@@ -61,7 +61,7 @@ struct LoginView: View {
             Button("Don't have an account? Register") {
                 isShowingRegister = true
             }
-            .font(.footnote)
+            .poppinsFont(size: 12)
             .padding(.top, 5)
 
             Spacer()

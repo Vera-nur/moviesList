@@ -18,14 +18,17 @@ struct SearchView: View {
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                .poppinsFont(size: 16)
 
                 if viewModel.isLoading {
                     ProgressView("Searching...")
                         .padding()
+                        .poppinsFont(size: 16)
                 } else if let error = viewModel.errorMessage {
                     Text(error)
                         .foregroundColor(.red)
                         .padding()
+                        .poppinsFont(size: 14)
                 } else {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 16) {

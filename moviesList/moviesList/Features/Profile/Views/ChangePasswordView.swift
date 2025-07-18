@@ -15,20 +15,21 @@ struct ChangePasswordView: View {
         NavigationStack {
             Form {
                 Section {
-                    SecureField("Current Password", text: $viewModel.currentPassword)
-                    SecureField("New Password", text: $viewModel.newPassword)
-                    SecureField("Confirm New Password", text: $viewModel.confirmPassword)
+                    SecureField("Current Password", text: $viewModel.currentPassword).poppinsFont(size: 16)
+                    SecureField("New Password", text: $viewModel.newPassword).poppinsFont(size: 16)
+                    SecureField("Confirm New Password", text: $viewModel.confirmPassword).poppinsFont(size: 16)
 
                     if !viewModel.passwordChangeMessage.isEmpty {
                         Text(viewModel.passwordChangeMessage)
                             .foregroundColor(.red)
-                            .font(.caption)
+                            .poppinsFont(size: 13)
                     }
 
                     Button("Save Password") {
                         viewModel.updatePassword()
                     }
                     .foregroundColor(.blue)
+                    .poppinsFont(size: 16, weight: .semibold)
                 }
             }
             .navigationTitle("Change Password")
@@ -37,6 +38,7 @@ struct ChangePasswordView: View {
                     Button("Cancel") {
                         dismiss()
                     }
+                    .poppinsFont(size: 16)
                 }
             }
         }

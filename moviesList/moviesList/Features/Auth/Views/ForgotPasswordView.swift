@@ -22,12 +22,11 @@ struct ForgotPasswordView: View {
                 .padding(.top, 10)
 
             Text("Reset Your Password")
-                .font(.title3)
-                .fontWeight(.semibold)
+                .poppinsFont(size: 20, weight: .semibold)
                 .padding(.top, 4)
 
             Text("Enter your email address and we’ll send you a link to reset your password.")
-                .font(.footnote)
+                .poppinsFont(size: 14)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
@@ -56,7 +55,7 @@ struct ForgotPasswordView: View {
             if let message = message {
                 Text(message)
                     .foregroundColor(.red)
-                    .font(.caption)
+                    .poppinsFont(size: 12)
                     .multilineTextAlignment(.center)
             }
 
