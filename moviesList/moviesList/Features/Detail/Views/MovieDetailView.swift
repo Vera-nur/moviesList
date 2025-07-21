@@ -30,11 +30,11 @@ struct MovieDetailView: View {
                 Text(movie.title ?? "")
                     .poppinsFont(size: 22, weight: .bold)
 
-                Text("Rating: \(String(format: "%.1f", movie.vote_average ?? 0.0))")
+                Text("Rating: %@".localized(with: [String(format: "%.1f", movie.vote_average ?? 0.0)]))
                     .poppinsFont(size: 14)
                     .foregroundColor(.gray)
 
-                Text("Release Date: \(movie.release_date ?? "")")
+                Text("Release Date: %@".localized(with: [movie.release_date ?? ""]))
                     .poppinsFont(size: 14)
 
 
@@ -44,7 +44,7 @@ struct MovieDetailView: View {
             }
             .padding()
         }
-        .navigationTitle("Movie Details")
+        .navigationTitle("Movie Details".localized())
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(trailing:
             Button(action: {

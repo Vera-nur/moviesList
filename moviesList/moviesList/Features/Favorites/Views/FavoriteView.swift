@@ -18,7 +18,7 @@ struct FavoriteView: View {
     var body: some View {
         NavigationView{
             if favoriteViewModel.favoriteMovies.isEmpty {
-                Text("You have no favorite movies yet.")
+                Text("You have no favorite movies yet.".localized())
                     .poppinsFont(size: 16)
                     .foregroundColor(.gray)
                     .padding()
@@ -33,7 +33,7 @@ struct FavoriteView: View {
                     }
                     .padding()
                 }
-                .navigationTitle("Favorites")
+                .navigationTitle("Favorites".localized())
             }
         }
     }

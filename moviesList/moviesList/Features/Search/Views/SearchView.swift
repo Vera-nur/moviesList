@@ -13,7 +13,7 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Search for a movie...", text: $viewModel.query, onCommit: {
+                TextField("Search for a movie...".localized(), text: $viewModel.query, onCommit: {
                     viewModel.search()
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -21,7 +21,7 @@ struct SearchView: View {
                 .poppinsFont(size: 16)
 
                 if viewModel.isLoading {
-                    ProgressView("Searching...")
+                    ProgressView("Searching...".localized())
                         .padding()
                         .poppinsFont(size: 16)
                 } else if let error = viewModel.errorMessage {
@@ -42,7 +42,7 @@ struct SearchView: View {
                     }
                 }
             }
-            .navigationTitle("Search")
+            .navigationTitle("Search".localized())
         }
     }
 }

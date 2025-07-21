@@ -21,26 +21,26 @@ struct ForgotPasswordView: View {
                 .frame(width: 40, height: 5)
                 .padding(.top, 10)
 
-            Text("Reset Your Password")
+            Text("Reset Your Password".localized())
                 .poppinsFont(size: 20, weight: .semibold)
                 .padding(.top, 4)
 
-            Text("Enter your email address and we’ll send you a link to reset your password.")
+            Text("Enter your email address and we’ll send you a link to reset your password.".localized())
                 .poppinsFont(size: 14)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal)
 
-            TextField("Email address", text: $email)
+            TextField("Email address".localized(), text: $email)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(10)
                 .keyboardType(.emailAddress)
                 .autocapitalization(.none)
 
-            Button("Send Reset Email") {
+            Button("Send Reset Email".localized()) {
                 if email.isEmpty {
-                    message = "Please enter your email."
+                    message = "Please enter your email.".localized()
                     return
                 }
                 viewModel.resetPassword(email: email)
@@ -64,9 +64,9 @@ struct ForgotPasswordView: View {
         .padding()
         .alert(isPresented: $showResetAlert) {
             Alert(
-                title: Text("Password Reset"),
-                message: Text(viewModel.errorMessage ?? "Unknown error occurred."),
-                dismissButton: .default(Text("OK")) {
+                title: Text("Password Reset".localized()),
+                message: Text(viewModel.errorMessage ?? "Unknown error occurred.".localized()),
+                dismissButton: .default(Text("OK".localized())) {
                     dismiss()
                 }
             )

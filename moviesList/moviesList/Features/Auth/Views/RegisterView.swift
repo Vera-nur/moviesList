@@ -13,17 +13,17 @@ struct RegisterView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("Create Your Account")
+            Text("Create Your Account".localized())
                 .poppinsFont(size: 20, weight: .semibold)
                 .padding(.top, 40)
 
             VStack(spacing: 15) {
                 Group {
-                    CustomTextField(title: "First Name", text: $viewModel.firstName)
-                    CustomTextField(title: "Last Name", text: $viewModel.lastName)
+                    CustomTextField(title: "First Name".localized(), text: $viewModel.firstName)
+                    CustomTextField(title: "Last Name".localized(), text: $viewModel.lastName)
 
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("Birth Date")
+                        Text("Birth Date".localized())
                             .poppinsFont(size: 14)
                             .foregroundColor(.gray)
                         DatePicker("", selection: $viewModel.birthDate, displayedComponents: .date)
@@ -32,9 +32,9 @@ struct RegisterView: View {
                             .frame(maxWidth: .infinity)
                     }
 
-                    CustomTextField(title: "Phone Number", text: $viewModel.phoneNumber, keyboardType: .phonePad)
-                    CustomTextField(title: "Email", text: $viewModel.email, keyboardType: .emailAddress)
-                    SecureInputField(title: "Password", text: $viewModel.password)
+                    CustomTextField(title: "Phone Number".localized(), text: $viewModel.phoneNumber, keyboardType: .phonePad)
+                    CustomTextField(title: "Email".localized(), text: $viewModel.email, keyboardType: .emailAddress)
+                    SecureInputField(title: "Password".localized(), text: $viewModel.password)
                 }
 
                 if let error = viewModel.errorMessage {
@@ -53,7 +53,7 @@ struct RegisterView: View {
             Button(action: {
                 viewModel.register()
             }) {
-                Text("Register")
+                Text("Register".localized())
                     .poppinsFont(size: 16, weight: .semibold)
                     .frame(maxWidth: .infinity)
                     .padding()
@@ -63,7 +63,7 @@ struct RegisterView: View {
             }
             .padding(.horizontal)
 
-            Button("Back to Login") {
+            Button("Back to Login".localized()) {
                 dismiss()
             }
             .poppinsFont(size: 12)

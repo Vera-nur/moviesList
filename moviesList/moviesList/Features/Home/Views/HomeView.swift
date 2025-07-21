@@ -23,7 +23,7 @@ struct HomeView: View {
             ZStack {
                 Group {
                     if viewModel.isLoading {
-                        ProgressView("Loading...")
+                        ProgressView("Loading...".localized())
                     } else if let error = viewModel.errorMessage {
                         Text(error)
                             .foregroundColor(.red)
@@ -55,7 +55,7 @@ struct HomeView: View {
                     .zIndex(1)
                 }
             }
-            .navigationTitle("Popular Movies")
+            .navigationTitle("Popular Movies".localized())
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -74,6 +74,7 @@ struct HomeView: View {
         }
     }
 }
+
 
 #Preview {
     HomeView()

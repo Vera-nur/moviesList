@@ -15,9 +15,9 @@ struct ChangePasswordView: View {
         NavigationStack {
             Form {
                 Section {
-                    SecureField("Current Password", text: $viewModel.currentPassword).poppinsFont(size: 16)
-                    SecureField("New Password", text: $viewModel.newPassword).poppinsFont(size: 16)
-                    SecureField("Confirm New Password", text: $viewModel.confirmPassword).poppinsFont(size: 16)
+                    SecureField("Current Password".localized(), text: $viewModel.currentPassword).poppinsFont(size: 16)
+                    SecureField("New Password".localized(), text: $viewModel.newPassword).poppinsFont(size: 16)
+                    SecureField("Confirm New Password".localized(), text: $viewModel.confirmPassword).poppinsFont(size: 16)
 
                     if !viewModel.passwordChangeMessage.isEmpty {
                         Text(viewModel.passwordChangeMessage)
@@ -25,17 +25,17 @@ struct ChangePasswordView: View {
                             .poppinsFont(size: 13)
                     }
 
-                    Button("Save Password") {
+                    Button("Save Password".localized()) {
                         viewModel.updatePassword()
                     }
                     .foregroundColor(.blue)
                     .poppinsFont(size: 16, weight: .semibold)
                 }
             }
-            .navigationTitle("Change Password")
+            .navigationTitle("Change Password".localized())
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button("Cancel".localized()) {
                         dismiss()
                     }
                     .poppinsFont(size: 16)

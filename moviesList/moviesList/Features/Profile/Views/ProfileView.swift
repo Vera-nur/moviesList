@@ -25,13 +25,13 @@ struct ProfileView: View {
             
             Divider()
             
-            Button("Edit Profile") {
+            Button("Edit Profile".localized()) {
                 isEditing = true
             }
             .foregroundColor(.blue)
             .poppinsFont(size: 16, weight: .medium)
             
-            Button("Logout", role: .destructive) {
+            Button("Logout".localized(), role: .destructive) {
                 authViewModel.logout()
                 isShowing = false
                 

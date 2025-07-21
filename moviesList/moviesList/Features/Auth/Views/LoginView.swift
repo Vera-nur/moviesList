@@ -15,7 +15,7 @@ struct LoginView: View {
     var body: some View {
         VStack(spacing: 20) {
             
-            Image("Logo")
+            Image("Logo".localized())
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100)
@@ -23,11 +23,11 @@ struct LoginView: View {
                 .shadow(radius: 5)
                 .padding(.top, 40)
 
-            Text("Welcome")
+            Text("Welcome".localized())
                 .poppinsFont(size: 24, weight: .semibold)
 
-            CustomTextField(title: "Email", text: $viewModel.email, keyboardType: .emailAddress)
-            SecureInputField(title: "Password", text: $viewModel.password)
+            CustomTextField(title: "Email".localized(), text: $viewModel.email, keyboardType: .emailAddress)
+            SecureInputField(title: "Password".localized(), text: $viewModel.password)
 
             if let errorMessage = viewModel.errorMessage {
                 Text(errorMessage)
@@ -38,7 +38,7 @@ struct LoginView: View {
             Button(action: {
                 viewModel.login()
             }) {
-                Text("Login")
+                Text("Login".localized())
                     .poppinsFont(size: 16, weight: .semibold)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
@@ -46,7 +46,7 @@ struct LoginView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-            Button("Forgot password?") {
+            Button("Forgot password?".localized()) {
                 isShowingResetPassword = true
             }
             .poppinsFont(size: 12)
@@ -58,7 +58,7 @@ struct LoginView: View {
             }
             
 
-            Button("Don't have an account? Register") {
+            Button("Don't have an account? Register".localized()) {
                 isShowingRegister = true
             }
             .poppinsFont(size: 12)
