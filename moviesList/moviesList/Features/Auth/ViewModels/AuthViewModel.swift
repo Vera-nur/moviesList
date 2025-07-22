@@ -5,8 +5,14 @@
 //  Created by Vera Nur on 14.07.2025.
 //
 
+
 import Foundation
 import FirebaseAuth
+import Firebase
+import GoogleSignIn
+import GoogleSignInSwift
+import UIKit
+
 
 class AuthViewModel: ObservableObject {
     @Published var email = ""
@@ -30,7 +36,48 @@ class AuthViewModel: ObservableObject {
             }
         }
     }
+    
 
+    
+    func signInWithGoogle() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let rootViewController = windowScene.windows.first?.rootViewController else {
+            print("No root view controller found.")
+            return
+        }
+
+        GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { [weak self] result, error in
+            if let error = error {
+                self?.errorMessage = "Google Sign-In error: \(error.localizedDescription)"
+                return
+            }
+
+            guard
+                let user = result?.user,
+                let idToken = user.idToken?.tokenString
+            else {
+                self?.errorMessage = "Google credentials are missing."
+                return
+            }
+
+            let accessToken = user.accessToken.tokenString
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+
+            Auth.auth().signIn(with: credential) { _, error in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self?.errorMessage = "Firebase Sign-In failed: \(error.localizedDescription)"
+                    } else {
+                        self?.isAuthenticated = true
+                    }
+                }
+            }
+        }
+    }
+    
+    
     func login() {
         AuthManager.shared.login(email: email, password: password) { result in
             DispatchQueue.main.async {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GoogleSignInSwift
 
 struct LoginView: View {
     @StateObject private var viewModel = AuthViewModel()
@@ -46,6 +47,14 @@ struct LoginView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
+            
+            GoogleSignInButton {
+                viewModel.signInWithGoogle()
+            }
+            .frame(height: 50)
+            .padding(.horizontal)
+            
+            
             Button("Forgot password?".localized()) {
                 isShowingResetPassword = true
             }
